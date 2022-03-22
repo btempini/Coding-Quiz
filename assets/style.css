@@ -1,0 +1,45 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 50px;
+  text-align: center;
+  margin-top: 150px;
+  text-decoration: underline;
+}
+
+h2 {
+  margin: 0 200px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+button {
+  display: flex;
+}
+
+/* Button */
+.start-button {
+  margin: 50px auto;
+  border: 0;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  border-radius: 10px;
+  background-color: blue;
+}
+
+.start-button:hover {
+  background-color: darkblue;
+}
+
+.start-button:active {
+  box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
