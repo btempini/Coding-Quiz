@@ -7,7 +7,8 @@ var answer2 = document.querySelector(".answer2")
 var answer3 = document.querySelector(".answer3")
 var answer4 = document.querySelector(".answer4")
 var timerDisplay = document.querySelector(".timerDisplay")
-var playAgain = document.querySelector(".playAgain")
+var submitForm = document.querySelector(".submitForm")
+var submitBtn = document.querySelector(".submitBtn")
 var showScoreEl = document.querySelector(".showScoreEl")
 var showScore = document.querySelector(".showScore")
 //basis
@@ -24,10 +25,9 @@ function setTime() {
       clearInterval(timerInterval);
       gameOver()
     }
-
   }, 1000);
 }
-setTime();
+
 
 
 
@@ -60,6 +60,7 @@ var questions = [
 //start button
 startButton.addEventListener("click", function(event){
   //prevent default
+  setTime();
   event.preventDefault();
   //hide/show elements
   startButton.setAttribute("class", "hide")
@@ -103,25 +104,26 @@ function checkAnswer(event) {
 //game over function
 function gameOver() {
   startButton.setAttribute("class", "hide")
-  questionsEl.textContent = "Game Over!"
-  answersEl.setAttribute("class", "hide")
-  showScore.textContent = score
-  showScoreEl.setAttribute("class", "show")
-  playAgain.setAttribute("class", "show")
+  questionsEl.textContent = "All done!";
+  answersEl.setAttribute("class", "hide");
+  showScore.textContent = score;
+  showScoreEl.setAttribute("class", "show");
+  submitForm.setAttribute("class", "show");
 }
 
 //event listener for play again
-playAgain.addEventListener("click", playAgainBtn)
+submitBtn.addEventListener("click", submitScore)
 
-//play Again function
-function playAgainBtn () {
+//submit function
+function submitScore () {
   index = 0;
   score = 0;
   timer = 75;
   localStorage.clear();
   showScoreEl.setAttribute("class", "hide");
-  playAgain.setAttribute("class", "hide");
+  submitForm.setAttribute("class", "hide");
   answersEl.setAttribute("class", "show");
+  console.log(submitForm.value)
   
   showNext();
 }
