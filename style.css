@@ -40,6 +40,7 @@ li {
 }
 
 button {
+  display: block;
   background-color: purple;
   color: white;
   padding: 5px;
