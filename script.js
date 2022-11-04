@@ -14,6 +14,8 @@ var showScore = document.querySelector(".showScore")
 var scoreBoard = document.querySelector(".scoreBoard")
 var userName = document.querySelector(".userName")
 var playAgainBtn = document.querySelector(".playAgain")
+var viewHighscores = document.querySelector(".viewHighScore")
+var info = document.querySelector(".info")
 var clock;
 
 //basis
@@ -55,12 +57,33 @@ var questions = [
     title: "A loop that never ends is referred to as a(n)_________.",
     choices: ["While loop", "Infinite loop", "Recursive loop", "For loop"],
     answer: "Infinite loop"
+  },
+  {
+    title: "Which command will stop an infinite loop?",
+    choices: ["Alt - C", "Shift - C", "Esc", "Ctrl - C"],
+    answer: "Ctrl - C",
+  },
+  {
+    title: "Kim has just constructed her first for loop within the Java language.  Which of the following is not a required part of a for loop?",
+    choices: ["Initialization", "Condition", "Variable", "Increment"],
+    answer: "Variable"
+  },
+  {
+    title: "Jay is considering adding a repetition statement within his Java programming final project. Jay is unsure of the number of times each loop needs to execute.  Analyze the conditional statements below and select which statement best fits the need identified by Jay within his programming.",
+    choices: ["While loop", "If-Else", "For loop", "Switch Statement"],
+    answer: "While loop"
+  },
+  {
+    title: "_______ is the process of finding errors and fixing them within a program.",
+    choices: ["Compiling", "Executing", "Debugging", "Scanning"],
+    answer: "Debugging"
   }
 ]
 
 //start button
 startButton.addEventListener("click", function(event){
   //prevent default
+  info.setAttribute("class", "hide")
   setTime();
   event.preventDefault();
   //hide/show elements
@@ -84,9 +107,8 @@ function checkAnswer(event) {
   event.preventDefault();
   var answer = event.target.textContent;
   if(answer === questions[index].answer) {
-    score = score + 10;
+    score++;
   } else {
-    score = score - 10;
     timer = timer - 15;
   }
   //update storage for score
@@ -123,14 +145,18 @@ function submitScore (event) {
   var highscores = JSON.parse(localStorage.getItem("highscore")) || [];
   highscores.push(endScore);
   localStorage.setItem("highscore", JSON.stringify(highscores));
+  userName.value = ""
   displayScore();
 }
 
 function displayScore() {
+  clearInterval(clock);
+  startButton.setAttribute("class", "hide")
   showScoreEl.setAttribute("class", "hide");
   submitForm.setAttribute("class", "hide");
   answersEl.setAttribute("class", "hide");
-  questionsEl.setAttribute("class", "hide");
+  questionsEl.textContent = "Highscores"
+  questionsEl.classList.add("hide");
   playAgainBtn.setAttribute("class", "show");
   scoreBoard.setAttribute("class", "show")
   var highscores = JSON.parse(localStorage.getItem("highscore"));
@@ -149,9 +175,10 @@ answersEl.addEventListener("click", checkAnswer)
 submitBtn.addEventListener("click", submitScore)
 //event listener for play again
 playAgainBtn.addEventListener("click", function() {
-  console.log("hello")
+  localStorage.clear()
   questionsEl.textContent = "Coding Quiz Challenge!"
-  questionsEl.setAttribute("class", "show")
+  questionsEl.classList.add("show")
+  info.setAttribute("class", "show")
   startButton.setAttribute("class", "show")
   playAgainBtn.setAttribute("class", "hide")
   scoreBoard.setAttribute("class", "hide")
@@ -159,3 +186,5 @@ playAgainBtn.addEventListener("click", function() {
   score = 0;
   timer = 75;
 })
+//event listener for view high score button
+viewHighscores.addEventListener("click", displayScore)

@@ -1,36 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Poor+Story&display=swap');
+/* Universal Selectors */
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
+body {
+  background-color: #F6F6C9;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Header Styling */
 .header {
+  font-size: 30px;
+  font-family: 'Poor Story', cursive;
+  color: #4FA095;
   display: flex;
   justify-content: space-between;
   padding: 20px;
 }
 
+.header span {
+  font-size: 40px;
+  margin-left: 5px;
+}
+
+.header a {
+  text-decoration: none;
+  color: #4FA095;
+}
+
+/*Main section div*/
 .quiz {
+  background-color: #BAD1C2;
+  border-radius: 10px;
+  margin: 50px auto;
+  width: 75%;
+  border: 3px solid #4FA095;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 100px;
+  padding: 25px;
 }
 
+/* Quiz titles */
 .questionsEl {
-  margin: 20px 0;
+  color: #153462;
+  margin: 20px 0 50px 0;
 }
 
-.startButton {
-  margin-top: 30px;
-  padding: 15px;
-}
-
+/* Answers */
 li {
+  font-weight: 400;
+  font-size: 25px;
   margin: 10px 0;
 }
 
+/* For Dom Manipulation */
 .hide {
   display: none;
 }
@@ -40,8 +68,29 @@ li {
 }
 
 button {
+  margin-top: 30px;
+  padding: 15px;
+  margin: 10px auto;
+  border-width: thin;
+  font-family: 'Poor Story', cursive;
+  font-size: 30px;
+  border-style: groove;
+  border-color: buttonborder;
+  border-image: initial;
+  border-radius: 10px;
   display: block;
-  background-color: purple;
+  background-color: #153462;
   color: white;
   padding: 5px;
+}
+
+.userName {
+  margin: 20px;
+  height: 20px;
+}
+
+p {
+  margin-bottom: 30px;
+  line-height: 25px;
+  font-weight: 400;
 }
