@@ -94,3 +94,31 @@ p {
   line-height: 25px;
   font-weight: 400;
 }
+
+@media screen and (max-width: 600px) {
+  p {
+    margin-bottom: 15px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+
+  .questionsEl {
+    font-size: 20px;
+  }
+
+  button {
+    font-size: 15px;
+  }
+
+  .header {
+    font-size: 20px;
+  }
+
+  .header span {
+    font-size: 25px;
+  }
+
+  li {
+    font-size: 20px;
+  }
+}
