@@ -13,6 +13,9 @@ var showScoreEl = document.querySelector(".showScoreEl")
 var showScore = document.querySelector(".showScore")
 var scoreBoard = document.querySelector(".scoreBoard")
 var userName = document.querySelector(".userName")
+var playAgainBtn = document.querySelector(".playAgain")
+
+var userScoreEl = document.createElement("li");
 
 //basis
 var index = 0
@@ -24,7 +27,7 @@ function setTime() {
   var timerInterval = setInterval(function() {
     timer --;
     timerDisplay.textContent = timer
-    if(timer === 0) {
+    if(timer <= 0) {
       clearInterval(timerInterval);
       gameOver()
     }
@@ -79,8 +82,6 @@ function showNext(){
   answer4.textContent = questions[index].choices[3];   
   }
 
-//listens for click to new question and THEN fires check answer function
-answersEl.addEventListener("click", checkAnswer)
 //write a function to check answers
 function checkAnswer(event) {
   event.preventDefault();
@@ -112,9 +113,6 @@ function gameOver() {
   submitForm.setAttribute("class", "show");
 }
 
-//event listener for submit
-submitBtn.addEventListener("click", submitScore)
-
 //highscores stores an array of objects
 
 //submit function
@@ -125,6 +123,7 @@ function submitScore (event) {
     score: score,
   },
   ]
+  highscores = highscores.concat(highscores)
   localStorage.setItem("highscore", JSON.stringify(highscores));
   displayScore();
 }
@@ -134,15 +133,28 @@ function displayScore() {
   submitForm.setAttribute("class", "hide");
   answersEl.setAttribute("class", "hide");
   questionsEl.setAttribute("class", "hide");
+  playAgainBtn.setAttribute("class", "show");
+  userScoreEl.setAttribute("class", "show")
   var highscore = JSON.parse(localStorage.getItem("highscore"));
-  var userScoreEl = document.createElement("li");
-  console.log(highscore[0].userName);
+  
   userScoreEl.textContent = "Initials: " + highscore[0].userName + "  Score: " + highscore[0].score;
+  console.log(userScoreEl)
   scoreBoard.appendChild(userScoreEl);
 }
 
-
-
-index = 0;
-
-timer = 75;
+//listens for click to new question and THEN fires check answer function
+answersEl.addEventListener("click", checkAnswer)
+//event listener for submit
+submitBtn.addEventListener("click", submitScore)
+//event listener for play again
+playAgainBtn.addEventListener("click", function() {
+  console.log("hello")
+  questionsEl.textContent = "Coding Quiz Challenge!"
+  questionsEl.setAttribute("class", "show")
+  startButton.setAttribute("class", "show")
+  userScoreEl.setAttribute("class", "hide")
+  playAgainBtn.setAttribute("class", "hide")
+  index = 0;
+  score = 0;
+  timer = 75;
+})
