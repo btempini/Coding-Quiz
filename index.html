@@ -15,18 +15,20 @@
 
     <main class="quiz">
       <h1 class="questionsEl">Coding Quiz Challenge!</h1>
-      <ol id="select" class="answersEl hide">
+      <div id="select" class="answersEl hide">
         <button class="answer1"></button></li>
         <button class="answer2"></button></li>
         <button class="answer3"></button></li>
         <button class="answer4"></button></li>
-      </ol>
+      </div>
       <button class="startButton">START</button>
       <div class="showScoreEl hide">Score: <span class="showScore"></span></div>
       <form class="submitForm hide">
-        <input type="text" placeholder="Enter Initials">
+        <input class="userName" type="text" placeholder="Enter Initials">
         <button class="submitBtn">Submit</button>
       </form>
+      <ul class="scoreBoard">
+      </ul>
     </main>
     <script src="script.js"></script>
   </body>

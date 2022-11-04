@@ -11,6 +11,9 @@ var submitForm = document.querySelector(".submitForm")
 var submitBtn = document.querySelector(".submitBtn")
 var showScoreEl = document.querySelector(".showScoreEl")
 var showScore = document.querySelector(".showScore")
+var scoreBoard = document.querySelector(".scoreBoard")
+var userName = document.querySelector(".userName")
+
 //basis
 var index = 0
 var score = 0
@@ -54,8 +57,6 @@ var questions = [
     answer: "Infinite loop"
   }
 ]
-
-//highscores stores an array of objects
 
 //start button
 startButton.addEventListener("click", function(event){
@@ -111,19 +112,37 @@ function gameOver() {
   submitForm.setAttribute("class", "show");
 }
 
-//event listener for play again
+//event listener for submit
 submitBtn.addEventListener("click", submitScore)
 
+//highscores stores an array of objects
+
 //submit function
-function submitScore () {
-  index = 0;
-  score = 0;
-  timer = 75;
-  localStorage.clear();
+function submitScore (event) {
+  event.preventDefault()
+  var highscores = [{
+    userName: userName.value,
+    score: score,
+  },
+  ]
+  localStorage.setItem("highscore", JSON.stringify(highscores));
+  displayScore();
+}
+
+function displayScore() {
   showScoreEl.setAttribute("class", "hide");
   submitForm.setAttribute("class", "hide");
-  answersEl.setAttribute("class", "show");
-  console.log(submitForm.value)
-  
-  showNext();
+  answersEl.setAttribute("class", "hide");
+  questionsEl.setAttribute("class", "hide");
+  var highscore = JSON.parse(localStorage.getItem("highscore"));
+  var userScoreEl = document.createElement("li");
+  console.log(highscore[0].userName);
+  userScoreEl.textContent = "Initials: " + highscore[0].userName + "  Score: " + highscore[0].score;
+  scoreBoard.appendChild(userScoreEl);
 }
+
+
+
+index = 0;
+
+timer = 75;
