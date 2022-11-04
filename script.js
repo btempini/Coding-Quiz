@@ -14,8 +14,7 @@ var showScore = document.querySelector(".showScore")
 var scoreBoard = document.querySelector(".scoreBoard")
 var userName = document.querySelector(".userName")
 var playAgainBtn = document.querySelector(".playAgain")
-
-var userScoreEl = document.createElement("li");
+var clock;
 
 //basis
 var index = 0
@@ -23,19 +22,17 @@ var score = 0
 //create timer function
 var timer = 75
 timerDisplay.textContent = timer;
+//timer function
 function setTime() {
-  var timerInterval = setInterval(function() {
+  clock = setInterval(function() {
     timer --;
     timerDisplay.textContent = timer
     if(timer <= 0) {
-      clearInterval(timerInterval);
+      clearInterval(clock);
       gameOver()
     }
   }, 1000);
 }
-
-
-
 
 //use an array of objects
 var questions = [
@@ -99,6 +96,7 @@ function checkAnswer(event) {
     index++;
     showNext();
   } else {
+    clearInterval(clock);
     gameOver()
   }
 }
@@ -118,12 +116,12 @@ function gameOver() {
 //submit function
 function submitScore (event) {
   event.preventDefault()
-  var highscores = [{
+  var endScore = {
     userName: userName.value,
     score: score,
-  },
-  ]
-  highscores = highscores.concat(highscores)
+  };
+  var highscores = JSON.parse(localStorage.getItem("highscore")) || [];
+  highscores.push(endScore);
   localStorage.setItem("highscore", JSON.stringify(highscores));
   displayScore();
 }
@@ -134,12 +132,15 @@ function displayScore() {
   answersEl.setAttribute("class", "hide");
   questionsEl.setAttribute("class", "hide");
   playAgainBtn.setAttribute("class", "show");
-  userScoreEl.setAttribute("class", "show")
-  var highscore = JSON.parse(localStorage.getItem("highscore"));
-  
-  userScoreEl.textContent = "Initials: " + highscore[0].userName + "  Score: " + highscore[0].score;
+  scoreBoard.setAttribute("class", "show")
+  var highscores = JSON.parse(localStorage.getItem("highscore"));
+  for (var i = 0; i < highscores.length; i++) {
+    var userScoreEl = document.createElement("li");
+    userScoreEl.setAttribute("class", "show");
+    userScoreEl.textContent = "Initials: " + highscores[i].userName + "  Score: " + highscores[i].score;
+    scoreBoard.appendChild(userScoreEl);
+  }
   console.log(userScoreEl)
-  scoreBoard.appendChild(userScoreEl);
 }
 
 //listens for click to new question and THEN fires check answer function
@@ -152,8 +153,8 @@ playAgainBtn.addEventListener("click", function() {
   questionsEl.textContent = "Coding Quiz Challenge!"
   questionsEl.setAttribute("class", "show")
   startButton.setAttribute("class", "show")
-  userScoreEl.setAttribute("class", "hide")
   playAgainBtn.setAttribute("class", "hide")
+  scoreBoard.setAttribute("class", "hide")
   index = 0;
   score = 0;
   timer = 75;
