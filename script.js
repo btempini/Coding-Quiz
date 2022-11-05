@@ -64,12 +64,12 @@ var questions = [
     answer: "Ctrl - C",
   },
   {
-    title: "Kim has just constructed her first for loop within the Java language.  Which of the following is not a required part of a for loop?",
+    title: "Kim has just constructed her first for loop within the Javascript language.  Which of the following is not a required part of a for loop?",
     choices: ["Initialization", "Condition", "Variable", "Increment"],
     answer: "Variable"
   },
   {
-    title: "Jay is considering adding a repetition statement within his Java programming final project. Jay is unsure of the number of times each loop needs to execute.  Analyze the conditional statements below and select which statement best fits the need identified by Jay within his programming.",
+    title: "Jay is considering adding a repetition statement within his Javascript programming final project. Jay is unsure of the number of times each loop needs to execute.  Analyze the conditional statements below and select which statement best fits the need identified by Jay within his programming.",
     choices: ["While loop", "If-Else", "For loop", "Switch Statement"],
     answer: "While loop"
   },
